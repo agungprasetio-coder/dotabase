@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Teamlist from './Teamlist'
 
 class App extends React.Component {
   constructor() {
@@ -41,7 +42,8 @@ class App extends React.Component {
         <nav className="navbar navbar-dark bg-dark justify-content-center border-bottom border-info shadow">
           <h1 className="h1 navbar-brand text-info font-weight-bold">Team List</h1>
         </nav>
-        <table className="table table-borderless table-striped table-dark">
+        <Teamlist teams={teams} deleteTeam={this.deleteTeam.bind(this)}></Teamlist>
+        {/* <table className="table table-borderless table-striped table-dark">
           <thead>
             <tr className="text-info">
               <th scope="col">#</th>
@@ -66,7 +68,7 @@ class App extends React.Component {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </React.Fragment>
     ) 
   }
