@@ -1,10 +1,18 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 
 function Teamlist(props) {
   const {teams, deleteTeam} = props
+  const history = useHistory()
+
   function detailTeam(id) {
-    
+    history.push('/teams/' + id)
   }
+
+  function addToFavorites(id) {
+
+  }
+
   return (
 		<table className="table table-borderless table-striped table-dark">
       <thead>
@@ -15,7 +23,7 @@ function Teamlist(props) {
           <th scope="col">Alias</th>
           <th scope="col">Wins</th>
           <th scope="col">Losses</th>
-          <th scope="col">Action</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +35,7 @@ function Teamlist(props) {
             <td className="align-middle">{team.tag}</td>
             <td className="align-middle">{team.wins}</td>
             <td className="align-middle">{team.losses}</td>
-            <td className="align-middle"><button className="btn btn-secondary" onClick={() => detailTeam(team.team_id)}>Detail</button>&nbsp;<button className="btn btn-danger" onClick={() => deleteTeam(team.team_id)}>Delete</button></td>
+            <td className="align-middle"><button className="btn btn-info" onClick={() => addToFavorites(team.team_id)}>Add to Favorites</button>&nbsp;<button className="btn btn-secondary" onClick={() => detailTeam(team.team_id)}>Detail</button>&nbsp;<button className="btn btn-danger" onClick={() => deleteTeam(team.team_id)}>Delete</button></td>
           </tr>
         ))}
       </tbody>
