@@ -2,6 +2,9 @@ import React from 'react'
 
 function Teamlist(props) {
   const {teams, deleteTeam} = props
+  function detailTeam(id) {
+    
+  }
   return (
 		<table className="table table-borderless table-striped table-dark">
       <thead>
@@ -24,7 +27,7 @@ function Teamlist(props) {
             <td className="align-middle">{team.tag}</td>
             <td className="align-middle">{team.wins}</td>
             <td className="align-middle">{team.losses}</td>
-            <td className="align-middle"><button className="btn btn-danger" onClick={() => deleteTeam(team.team_id)}>Delete</button></td>
+            <td className="align-middle"><button className="btn btn-secondary" onClick={() => detailTeam(team.team_id)}>Detail</button>&nbsp;<button className="btn btn-danger" onClick={() => deleteTeam(team.team_id)}>Delete</button></td>
           </tr>
         ))}
       </tbody>

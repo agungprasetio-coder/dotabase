@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import Teamlist from './components/Teamlist'
 import AddTeam from './components/AddTeam'
+import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom'
+import './App.css'
+import TeamDetail from './components/TeamDetail'
 
 function App () {
   const [teams, setTeams] = useState([])
@@ -34,11 +37,25 @@ function App () {
   
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark justify-content-center border-bottom border-info shadow">
-        <h1 className="h1 navbar-brand text-info font-weight-bold">Team List</h1>
-      </nav>
-      <Teamlist teams={teams} deleteTeam={deleteTeam}></Teamlist>
-      <AddTeam teams={teams} setTeams={setTeams}></AddTeam>
+      <Router>
+        <nav className="navbar navbar-dark bg-dark justify-content-center border-bottom border-info shadow">
+          <div className="navbar-brand text-info font-weight-bold">
+            <Link to="/">Home</Link> | <Link to="/teams">Team List</Link>
+          </div>
+        </nav>
+        <Switch>
+          <Route path="/teams">
+            <Teamlist teams={teams} deleteTeam={deleteTeam}></Teamlist>
+            <AddTeam teams={teams} setTeams={setTeams}></AddTeam>
+          </Route>
+          <Route path="/teams/:team_id">
+            <TeamDetail></TeamDetail>
+          </Route>
+          <Route path="/">
+            <h4 className="mt-4" align="center">Welcome Page</h4>
+          </Route>
+        </Switch>
+      </Router>
     </>
   ) 
 }
