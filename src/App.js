@@ -4,6 +4,7 @@ import AddTeam from './components/AddTeam'
 import {Switch, Link, Route} from 'react-router-dom'
 import './App.css'
 import TeamDetail from './components/TeamDetail'
+import Favorite from './components/Favorite'
 
 function App () {
   const [teams, setTeams] = useState([])
@@ -39,12 +40,15 @@ function App () {
     <>
       <nav className="navbar navbar-dark bg-dark justify-content-center border-bottom border-info shadow">
         <div className="navbar-brand text-info font-weight-bold">
-          <Link to="/">Home</Link>
+          <Link to="/">Home</Link> | <Link to="/favorites">Favorite</Link>
         </div>
       </nav>
       <Switch>
         <Route path="/teams/:teamId">
           <TeamDetail/>
+        </Route>
+        <Route path="/favorites">
+          <Favorite/>
         </Route>
         <Route path="/">
           <Teamlist teams={teams} deleteTeam={deleteTeam}/>

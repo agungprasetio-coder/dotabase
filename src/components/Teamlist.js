@@ -1,16 +1,24 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 
 function Teamlist(props) {
   const {teams, deleteTeam} = props
   const history = useHistory()
+  const dispatch = useDispatch()
 
   function detailTeam(id) {
     history.push('/teams/' + id)
   }
 
-  function addToFavorites(id) {
-
+  function addToFavorites(team) {
+    // console.log(team, '<<<< nih dapet favorite team')
+    dispatch({
+      type: 'ADD_FAVORITE',
+      payload: {
+        team
+      }
+    })
   }
 
   return (
@@ -35,7 +43,7 @@ function Teamlist(props) {
             <td className="align-middle">{team.tag}</td>
             <td className="align-middle">{team.wins}</td>
             <td className="align-middle">{team.losses}</td>
-            <td className="align-middle"><button className="btn btn-info" onClick={() => addToFavorites(team.team_id)}>Add to Favorites</button>&nbsp;<button className="btn btn-secondary" onClick={() => detailTeam(team.team_id)}>Detail</button>&nbsp;<button className="btn btn-danger" onClick={() => deleteTeam(team.team_id)}>Delete</button></td>
+            <td className="align-middle"><button className="btn btn-info" onClick={() => addToFavorites(team)}>Add to Favorites</button>&nbsp;<button className="btn btn-secondary" onClick={() => detailTeam(team.team_id)}>Detail</button>&nbsp;<button className="btn btn-danger" onClick={() => deleteTeam(team.team_id)}>Delete</button></td>
           </tr>
         ))}
       </tbody>
