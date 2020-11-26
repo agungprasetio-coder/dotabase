@@ -1,12 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import useFetch from '../helpers/useFetch'
+import AppContext from '../context/AppContext'
 
 function TeamDetail () {
   const { teamId } = useParams()
   const [team] = useFetch('https://api.opendota.com/api/teams/' + teamId)
   const dispatch = useDispatch()
+  const appContext = useContext(AppContext)
 
   function addToFavorites (team) {
     dispatch({
@@ -52,7 +54,7 @@ function TeamDetail () {
               </tr>
             </tbody>
           </table>
-          <button className="btn btn-block btn-outline-info" onClick={()=>addToFavorites(team)}>Add to Favorite</button>
+          <button className="btn btn-block btn-outline-info" onClick={()=>addToFavorites(team)}>{appContext.label}</button>
         </div>
       </div>
     </>
