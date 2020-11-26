@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
 
 function AddTeam (props) {
-  const {teams, setTeams} = props
+  const {teams} = props
+  const dispatch = useDispatch()
   const [logo_url, setLogoUrl] = useState('')
   const [name, setName] = useState('')
   const [tag, setTag] = useState('')
@@ -38,7 +40,12 @@ function AddTeam (props) {
       wins,
       losses
     }
-    setTeams([newTeam, ...teams]) 
+    dispatch({
+      type: 'ADD_TEAM',
+      payload:{
+        newTeam
+      }
+    })
   }
 
   return (

@@ -3,11 +3,13 @@ import {useSelector, useDispatch} from 'react-redux'
 function Favorite() {
   const favorites = useSelector((state) => state.favorites)
   const dispatch = useDispatch()
-  console.log(favorites, '<<<< ini state dari store redux')
+
   function deleteTeam(id) {
     dispatch({
       type: 'DELETE_FAVORITE',
-      id
+      payload: {
+        id
+      }
     })
   }
   return (

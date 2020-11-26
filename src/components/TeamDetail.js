@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {useParams} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
+import useFetch from '../helpers/useFetch'
 
 function TeamDetail () {
-  const [team, setTeam] = useState({})
   const { teamId } = useParams()
+  const [team] = useFetch('https://api.opendota.com/api/teams/' + teamId)
   const dispatch = useDispatch()
 
   function addToFavorites (team) {
@@ -15,23 +16,6 @@ function TeamDetail () {
       }
     })
   }
-
-  useEffect(() => {
-    fetch('https://api.opendota.com/api/teams/' + teamId)
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject('Something wrong!')
-        } else {
-          return res.json()
-        }
-      })
-      .then(data => {
-        setTeam(data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
 
   return (
     <>
